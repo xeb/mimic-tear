@@ -1,0 +1,5 @@
+[transform]
+
+user = "Dan"
+num_prev_msgs = 5
+inc_channel_name = true
