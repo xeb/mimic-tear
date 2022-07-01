@@ -1,0 +1,3 @@
+[submodule "slack-export-parser"]
+	path = slack-export-parser
+	url = git@github.com:warmlogic/slack-export-parser.git

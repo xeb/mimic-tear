@@ -33,7 +33,8 @@ def generate(prompt):
         engine=engine,
         prompt=prompt,
         temperature=temperature,
-        max_tokens=config["max_tokens"]
+        max_tokens=config["max_tokens"],
+        stop=config["endtoken"]
     )
 
     print(colored(f"Received {len(response.choices)=}", "cyan"))
