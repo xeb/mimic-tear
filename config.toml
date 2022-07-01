@@ -1,5 +1,29 @@
-[transform]
+[config]
 
-user = "Dan"
+# the user you want to mimic
+user = "dan" 
+
+# relative or absolute path to the slack export
+history_path = "../goofyspot_history/" 
+
+# where to save the JSONL file
+output_path = "../goofyspot_history/dan_history.jsonl"
+
+# the channels to include, leave empty to get all channels or delete
+channels = ["general"] 
+
+# the number of previous chats to use when building the prompt
 num_prev_msgs = 5
+
+# whether or not to include the channel as context at the beginning of the prompt
 inc_channel_name = true
+
+# the token used to end the completion
+endtoken = "<e>"
+
+# the token used to denote no previous message was seen
+noprevtoken = "<n>"
+
+default_engine = "text-babbage-001"
+temperature = 0.70
+max_tokens = 150
