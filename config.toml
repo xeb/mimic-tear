@@ -3,6 +3,8 @@
 # the user you want to mimic
 user = "dan" 
 
+user_id = "U03MJE91EET"
+
 # relative or absolute path to the slack export
 history_path = "../goofyspot_history/" 
 
@@ -24,6 +26,18 @@ endtoken = "<e>"
 # the token used to denote no previous message was seen
 noprevtoken = "<n>"
 
-default_engine = "ada:ft-personal-2022-07-01-06-39-13"
+# the fine tuned model
+#default_engine = "ada:ft-personal-2022-07-01-06-39-13"
+default_engine = "curie:ft-personal-2022-07-01-22-09-51"
+
+# the suffix used in a prompt to end it
+prompt_suffix = "\n\n###\n\n"
+
+# the baseline temp of the completion
 temperature = 0.70
-max_tokens = 150
+
+# the maximum number of tokens per request
+max_tokens = 75
+
+# the max number of replies allowed for a given thread
+max_thread_replies = 6

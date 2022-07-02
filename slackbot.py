@@ -23,6 +23,8 @@ def generate(prompt):
     temperature=config["temperature"] + additional_temp
     prompt = prompt.replace(":fire:", "")
 
+    prompt = prompt + config["prompt_suffix"]
+
     if temperature > 1:
         temperature = 0.99
 
@@ -79,6 +81,8 @@ def mention_handler_app_mention(body, say, logger):
 @app.event("message")
 def mention_handler_message(body, say):
     print(colored(f"--------- starting message within a thread -----", "yellow"))
+    config = toml.load("config.toml")["config"]
+
     event = body["event"]
     thread_ts = event.get("thread_ts", None) or event["ts"]
     messag_ts = event.get("ts", None)
@@ -94,12 +98,8 @@ def mention_handler_message(body, say):
     #current_user = app.client.users_identity()
     current_user = ""
 
-    if "U03MM3WLXHT" in user: #TODO get app.client.users_identity() to work dynamically, stupid OAuth
-        print(colored(f"The message was from Goofybot, stopping", "yellow"))
-        return
-
-    if "U03SEPH39_" in user:
-        print(colored(f"The message was from Goofyboy I think {user=}, stopping", "yellow"))
+    if config["user_id"] in user: #TODO get app.client.users_identity() to work dynamically, stupid OAuth
+        print(colored(f"The message was from {config['user']=}, stopping", "yellow"))
         return
 
     print(colored(f"{user=}\n{channel=}\n{thread_ts=}\n{current_user=}", "yellow"))
@@ -120,11 +120,11 @@ def mention_handler_message(body, say):
         print(colored("Duplicate! exiting", "yellow"))
         return
 
-    if "U03MM3WLXHT" not in history:
-        print(colored(f"NOT RESPONDING!!! to {history=}, none of my business", "yellow"))
+    if config["user_id"] not in history:
+        print(colored(f"NOT RESPONDING!!! my bot is not in this chat to {history=}, none of my business", "yellow"))
         return
 
-    if history.count("U03MM3WLXHT") >= 3:
+    if history.count(config["user_id"]) > config["max_thread_replies"]:
         print(colored(f"NOT RESPONDING!!! I've been too chatty", "yellow"))
         return
 
