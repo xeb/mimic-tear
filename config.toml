@@ -28,7 +28,8 @@ noprevtoken = "<n>"
 
 # the fine tuned model
 #default_engine = "ada:ft-personal-2022-07-01-06-39-13"
-default_engine = "curie:ft-personal-2022-07-01-22-09-51"
+#default_engine = "curie:ft-personal-2022-07-01-22-09-51"
+default_engine = "ft:gpt-3.5-turbo-0613:personal::7rKY9jda"
 
 # the suffix used in a prompt to end it
 prompt_suffix = "\n\n###\n\n"
@@ -40,4 +41,4 @@ temperature = 0.70
 max_tokens = 75
 
 # the max number of replies allowed for a given thread
-max_thread_replies = 6
+max_thread_replies = 1000

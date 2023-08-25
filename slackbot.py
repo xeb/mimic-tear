@@ -31,17 +31,26 @@ def generate(prompt):
     engine = config["default_engine"] # need to update this to the fine tuned one
 
     print(colored(f"Using {prompt=}", "cyan"))
-    response = openai.Completion.create(
-        engine=engine,
-        prompt=prompt,
-        temperature=temperature,
-        max_tokens=config["max_tokens"],
-        stop=config["endtoken"]
+#    response = openai.Completion.create(
+#        engine=engine,
+#        prompt=prompt,
+#        temperature=temperature,
+#        max_tokens=config["max_tokens"],
+#        stop=config["endtoken"]
+#    )
+    response = openai.ChatCompletion.create(
+        model=engine,
+        messages=[
+            {"role": "system", "content": "You are Dan Fearing, a friend who likes to joke but really loves his friends."},
+            {"role": "user", "content": prompt}
+        ]
     )
 
     print(colored(f"Received {len(response.choices)=}", "cyan"))
     print(colored(f"Received {response.choices[0]=}", "cyan"))
-    txt = response.choices[0].text
+    #txt = response.choices[0].text
+    txt = response.choices[0].message.content.strip()
+    txt = txt.rstrip("<e>")
     return txt
 
 @app.event("app_mention")
